@@ -96,14 +96,30 @@ class ViewTests(unittest.TestCase):
         from .views import home
 
         request = testing.DummyRequest()
+        class dummy_webassets(object):
+            def urls(self):
+                return ['/static/styles.css']
+
+        webassets_env = {'css':dummy_webassets()}
+        request.webassets_env = webassets_env
+
         info = home(request)
-        self.assertEqual(info['project'], 'nurl')
+        self.assertTrue(info.has_key('css_asset'))
         self.assertFalse(info.has_key('short_url'))
 
     def test_shortening_success(self):
         from .views import home
 
         request = testing.DummyRequest()
+
+        request = testing.DummyRequest()
+        class dummy_webassets(object):
+            def urls(self):
+                return ['/static/styles.css']
+
+        webassets_env = {'css':dummy_webassets()}
+        request.webassets_env = webassets_env
+
         request.params = {'url': 'http://www.scielo.br'}
         request.route_url = lambda *args, **kwargs: 'http://s.cl/4kgjc'
         request.db = DummyMongoDB()
