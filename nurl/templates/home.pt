@@ -1,26 +1,87 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" xmlns:tal="http://xml.zope.org/namespaces/tal">
-<head>
-  <title>nurl :: url shortening app</title>
-  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
-  <meta name="keywords" content="nurl url-shortener python web application" />
-  <meta name="description" content="url shortener web application" />
-  <link rel="stylesheet" href="/static/bootstrap.min.css" type="text/css" media="screen" charset="utf-8" />
-</head>
-<body>
-  <div class="container">
-    <h1 tal:content="project"></h1>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xml:lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal">
+  <head>
+    <title>ref.scielo.org | The URL shortening tool for all SciELO resources</title>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <meta name="keywords" content="nurl url-shortener python web application" />
+    <meta name="description" content="url shortener web application" />
+    <link rel="stylesheet" href="${css_asset}" type="text/css" media="screen" charset="utf-8" />
+  </head>
+  <body>
+    <div class="container">
 
-    <form method="GET" action="#" class="form-vertical">
-      <label for="url">URL to be shortened:</label>
-      <input type="text" name="url" class="span6"/>
-      <input type="submit" value="Shorten!" />
-    </form>
+      <div class="logo">
+        <img src="http://static.scielo.org/all/logos/scielo-140x148.png"/>
+        <h2>The URL shortening tool for all SciELO resources.</h2>
+      </div>
 
-    <div tal:condition="exists: short_url" class="span5 alert alert-success">
-      <h4 class="alert-heading">Yeah! Just copy the URL below!</h4>
-      <a href="${short_url}">${short_url}</a>
+      <div class="well">
+        <form method="GET" action="#" class="form-vertical">
+          <input type="text" name="url" class="span8" placeholder="URL to be shortened"/>
+          <div>
+          <input type="submit" value="Shorten!" class="btn btn-primary btn-large" />
+          </div>
+        </form>
+        <p>
+          <small>
+            We are currently under beta testing, so we are supporting the domains scielo.org and scielo.br
+          </small>
+        </p>
+      </div>
+
+      <div tal:condition="exists: short_url" class="alert alert-success">
+        <h4 class="alert-heading">Just copy the URL below!</h4>
+        <a href="${short_url}">${short_url}</a>
+      </div>
+
+      <p class="lead">
+        The SciELO project ensures the resolution of the generated short URLs from <strong>ref.scielo.org</strong>, this way you can use them in your bibliographic references.
+      </p>
+
     </div>
-  </div>
-</body>
+
+    <div class="footer row-fluid shadow">
+      <div class="span6">
+        <div style="padding-left: 20px;">
+          <p><strong>SciELO - Scientific Electronic Library Online <br/>
+            <a href="http://www.fapesp.br" target="_blank">FAPESP</a> <a href="http://www.cnpq.br" target="_blank">CNPq</a> <a href="http://www.bireme.org">BIREME</a> <a href="http://www.fapunifesp.edu.br" target="_blank">FapUnifesp</a> </strong></p>
+          <p>Rua Dr. Diogo de   Farias, 1087 conj. 810&nbsp; - Vila Clementino  04037-003 São Paulo SP -   Brazil</p>
+          <p>Tel.: (55 11) 3369-4080 - Email: <a href="mailto:scielo@scielo.org">scielo@scielo.org</a>
+        </div>
+      </div><!--Footer-->
+      <div class="span2">
+        <h4>Help</h4>
+        <ul>
+          <li>
+            <a href="http://docs.scielo.org/projects/scielo-manager/en/latest/about.html" target="_blank">About</a>
+          </li>
+          <li>
+            <a href="http://docs.scielo.org/" target="_blank">Documentation</a>
+          </li>
+          <li>
+            <a href="http://trac.scielo.org/trac/scielo-manager/newticket?type=bug">Report bug</a>
+          </li>
+          <li>
+            <a href="http://groups.google.com/group/scielo-discuss" target="_blank">Discuss mailing list</a>
+          </li>
+        </ul>
+      </div>
+      <div class="span2">
+        <h4>Development</h4>
+        <ul>
+          <li><a href="http://www.github.com/scieloorg/" target="_blank">GitHub</a></li>
+          <li><a href="http://groups.google.com/group/scielo-dev" target="_blank">Dev mailing list</a></li>
+        </ul>
+      </div>
+      <div class="span2">
+        <h4>SciELO Project</h4>
+        <ul>
+          <li><a href="http://docs.scielo.org/en/latest/index.html">About</a></li>
+        </ul>
+      </div>
+    </div><!--row-fluid footer-->
+
+  </body>
 </html>

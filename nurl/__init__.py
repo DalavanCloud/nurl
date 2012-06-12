@@ -5,6 +5,7 @@ from pyramid.events import NewRequest
 from pyramid_beaker import set_cache_regions_from_settings
 import pymongo
 import newrelic.agent
+import webassets
 
 APP_PATH = os.path.abspath(os.path.dirname(__file__))
 
@@ -14,6 +15,14 @@ def main(global_config, **settings):
     """
     set_cache_regions_from_settings(settings)
     config = Configurator(settings=settings)
+
+    css = webassets.Bundle(
+        'bootstrap.min.css',
+        webassets.Bundle('styles.css', filters='yui_css'),
+        output='bundle.min.css')
+    config.add_webasset('css', css)
+    config.registry.settings['webassets_env'] = config.get_webassets_env()
+    config.add_subscriber(add_webassets_env, NewRequest)
 
     db_uri = settings['mongodb.db_uri']
     conn = pymongo.Connection(db_uri)
@@ -51,3 +60,7 @@ def add_mongo_db(event):
     settings = event.request.registry.settings
     db = settings['db_conn'][settings['mongodb.db_name']]
     event.request.db = db
+
+def add_webassets_env(event):
+    settings = event.request.registry.settings
+    event.request.webassets_env = settings['webassets_env']

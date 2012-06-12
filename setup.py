@@ -13,6 +13,8 @@ requires = [
     'pymongo',
     'pyramid_beaker',
     'newrelic',
+    'pyramid_webassets',
+    'yuicompressor',
     ]
 
 setup(name='nurl',
