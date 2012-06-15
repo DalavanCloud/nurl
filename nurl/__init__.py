@@ -3,6 +3,8 @@ import os
 from pyramid.config import Configurator
 from pyramid.events import NewRequest
 from pyramid_beaker import set_cache_regions_from_settings
+from pyramid.renderers import JSONP
+from pyramid.settings import asbool
 import pymongo
 import newrelic.agent
 import webassets
@@ -36,19 +38,23 @@ def main(global_config, **settings):
 
     config.add_subscriber(add_mongo_db, NewRequest)
 
+    config.add_renderer('jsonp', JSONP(param_name='callback'))
+
     config.add_static_view('static', 'static', cache_max_age=3600)
     config.add_route('home', '/')
     config.add_route('shortened', '/{short_ref}')
 
-    #rest api version 0.1
-    config.add_route('shortener_v01', '/api/v0.1/shorten')
+    #rest api version 1
+    config.add_route('shortener_v1', '/api/v1/shorten')
 
     config.scan()
     application = config.make_wsgi_app()
 
+    #newrelic agent
     try:
-        if settings.get('newrelic.enable', 'False').lower() == 'true':
-            newrelic.agent.initialize(os.path.join(APP_PATH, '..', 'newrelic.ini'), settings['newrelic.environment'])
+        if asbool(settings.get('newrelic.enable', False)):
+            newrelic.agent.initialize(os.path.join(APP_PATH, '..', 'newrelic.ini'),
+                settings['newrelic.environment'])
             return newrelic.agent.wsgi_application()(application)
         else:
             return application
