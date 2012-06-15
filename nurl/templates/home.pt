@@ -7,7 +7,7 @@
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
     <meta name="keywords" content="nurl url-shortener python web application" />
     <meta name="description" content="url shortener web application" />
-    <link rel="stylesheet" href="${css_asset}" type="text/css" media="screen" charset="utf-8" />
+    <link tal:repeat="url request.webassets_env['css'].urls()" rel="stylesheet" href="${url}" type="text/css" media="screen" charset="utf-8" />
   </head>
   <body>
     <div class="container">

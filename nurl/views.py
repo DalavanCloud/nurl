@@ -8,8 +8,7 @@ from pyramid import httpexceptions
 
 @view_config(route_name='home', renderer='templates/home.pt')
 def home(request):
-    css_assets = request.webassets_env['css'].urls()
-    response_dict = {'css_asset': css_assets[0]}
+    response_dict = {}
 
     incoming_url = request.params.get('url')
     if incoming_url is not None:
