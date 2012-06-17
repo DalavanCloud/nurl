@@ -12,7 +12,11 @@ def home(request):
 
     incoming_url = request.params.get('url')
     if incoming_url is not None:
-        short_url = url_shortener(request)
+        try:
+            short_url = url_shortener(request)
+        except httpexceptions.HTTPBadRequest:
+            raise httpexceptions.HTTPFound(request.route_url('home'))
+
         response_dict.update({'short_url': short_url})
 
     return response_dict
@@ -21,7 +25,7 @@ def home(request):
 def url_shortener(request):
 
     incoming_url = request.params.get('url')
-    if incoming_url is None:
+    if not incoming_url:
         raise httpexceptions.HTTPBadRequest()
 
     try:
