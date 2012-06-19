@@ -26,9 +26,14 @@
         </form>
         <p>
           <small>
-            We are currently under beta testing, so we are supporting the domains scielo.org and scielo.br
+            We are currently under beta testing.
           </small>
         </p>
+      </div>
+
+      <div tal:condition="exists: errors" class="alert alert-error" tal:repeat="error errors">
+        <h4 class="alert-heading">${error[0]}</h4>
+        ${error[1]}
       </div>
 
       <div tal:condition="exists: short_url" class="alert alert-success">
@@ -36,14 +41,19 @@
         <a href="${short_url}">${short_url}</a>
       </div>
 
-      <div tal:condition="exists: errors" class="span5 alert alert-error" tal:repeat="error errors">
-        <h4 class="alert-heading">${error[0]}</h4>
-        ${error[1]}
-      </div>
-
       <p class="lead">
         The SciELO project ensures the resolution of the generated short URLs from <strong>ref.scielo.org</strong>, this way you can use them in your bibliographic references.
       </p>
+
+      <h3>Available for the following host names:</h3>
+      <ul tal:condition="exists: request.registry.settings['nurl.whitelist']">
+        <span tal:repeat="hostname request.registry.settings['nurl.whitelist']"
+              tal:omit-tag="">
+        <li tal:condition="not hostname.startswith('www')">
+          ${hostname}
+        </li>
+        </span>
+      </ul>
 
     </div>
 

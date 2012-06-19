@@ -1,2 +1,14 @@
-scielo.br
 scielo.org
+scielo.org.ar
+scielo.br
+scielo.cl
+scielo.org.co
+scielo.sa.cr
+scielo.sld.cu
+scielo.isciii.es
+scielo.org.mx
+scielo.oces.mctes.pt
+scielo.org.za
+scielo.org.ve
+scielosp.org
+socialsciences.scielo.org
