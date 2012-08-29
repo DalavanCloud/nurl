@@ -12,3 +12,4 @@ scielo.org.za
 scielo.org.ve
 scielosp.org
 socialsciences.scielo.org
+docs.scielo.org
