@@ -13,3 +13,4 @@ scielo.org.ve
 scielosp.org
 socialsciences.scielo.org
 docs.scielo.org
+trac.scielo.org
