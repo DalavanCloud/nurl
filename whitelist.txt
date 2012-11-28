@@ -14,3 +14,4 @@ scielosp.org
 socialsciences.scielo.org
 docs.scielo.org
 trac.scielo.org
+books.scielo.org
