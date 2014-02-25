@@ -15,3 +15,4 @@ socialsciences.scielo.org
 docs.scielo.org
 trac.scielo.org
 books.scielo.org
+scielo-log.scielo.br
